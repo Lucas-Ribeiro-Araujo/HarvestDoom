@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnnbn2cd3wnql"]
+
+[ext_resource type="Script" path="res://Scenes/CharacterController.gd" id="1_tnbj8"]
+[ext_resource type="PackedScene" uid="uid://fl1uqdqckl1r" path="res://Scenes/Guns/m1_garand.tscn" id="2_04t8q"]
+[ext_resource type="PackedScene" uid="uid://obcjnxeq8qao" path="res://Scenes/fps_view_model.tscn" id="3_wr1iy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_myidf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gne5i"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_tnbj8")
+
+[node name="Foot" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_myidf")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_gne5i")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+fov = 60.0
+
+[node name="m1garand" parent="Head/Camera3D" instance=ExtResource("2_04t8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.424, -0.448, -0.034)
+ads_position = Vector3(0, -0.37, 0.096)
+vertical_influence = 0.1
+sway_amnt = 0.1
+
+[node name="FPSViewModel" parent="Head/Camera3D" node_paths=PackedStringArray("targetWeapon") instance=ExtResource("3_wr1iy")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.277, -1.14, 0.324)
+visible = false
+targetWeapon = NodePath("../m1garand")

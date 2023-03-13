@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://obcjnxeq8qao"]
+
+[ext_resource type="PackedScene" uid="uid://ccary05j38rdi" path="res://Assets/FPSViewModel.blend" id="1_hqnet"]
+[ext_resource type="Script" path="res://Scripts/CharacterController/fps_view_model.gd" id="2_k1so1"]
+[ext_resource type="Material" uid="uid://folad1jxh0rg" path="res://Assets/unshaded.material" id="3_d2t75"]
+
+[node name="FPSViewModel" node_paths=PackedStringArray("left_skeleton_ik", "right_skeleton_ik") instance=ExtResource("1_hqnet")]
+script = ExtResource("2_k1so1")
+left_skeleton_ik = NodePath("LeftArm/Skeleton3D/LeftArmIK")
+right_skeleton_ik = NodePath("RightArm/Skeleton3D/RightArmIK")
+
+[node name="Arm_R" parent="RightArm/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("3_d2t75")
+
+[node name="RightArmIK" type="SkeletonIK3D" parent="RightArm/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"ArmRight0"
+tip_bone = &"ArmRight1.001"
+min_distance = 0.001
+max_iterations = 50
+
+[node name="Arm_L" parent="LeftArm/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("3_d2t75")
+
+[node name="LeftArmIK" type="SkeletonIK3D" parent="LeftArm/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"ArmRight0"
+tip_bone = &"ArmRight1.001"
+min_distance = 0.001
+max_iterations = 50

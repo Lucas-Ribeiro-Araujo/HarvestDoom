@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://brglhjtwa5ohx"]
+
+[node name="Camera"]
+projection = 0
+far = 250.0

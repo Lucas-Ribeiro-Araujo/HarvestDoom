@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://odtsgkfn1xm5"]
+
+[ext_resource type="PackedScene" uid="uid://d358emtb05rrd" path="res://Assets/Characters/bigRat.blend" id="1_rcl6m"]
+[ext_resource type="Material" uid="uid://folad1jxh0rg" path="res://Assets/unshaded.material" id="2_gu7hc"]
+
+[node name="bigRat" instance=ExtResource("1_rcl6m")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(1.16851e-08, -9.82607e-08, 0.0505502, 0.998722)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/rotation = Quaternion(-5.81376e-09, 3.59546e-08, 0.0391274, 0.999234)
+bones/3/rotation = Quaternion(-0.699525, 0.00347497, 0.146475, 0.988475)
+bones/7/rotation = Quaternion(-0.699581, -0.102887, -0.699582, 0.102887)
+bones/8/rotation = Quaternion(0.000574557, -0.00253584, -0.00819871, 0.999963)
+
+[node name="RatMesh" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_gu7hc")
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Idle"
