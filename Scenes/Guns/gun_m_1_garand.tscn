@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2t75bo1c4scy"]
+
+[ext_resource type="PackedScene" uid="uid://dspfuml38jpa" path="res://Assets/Guns/mdl_gun_m1garand.blend" id="1_0n0mq"]
+[ext_resource type="Script" path="res://Scripts/Weapons/m1_garand.gd" id="2_v14hp"]
+
+[node name="mdl_gun_m1garand" node_paths=PackedStringArray("anim_player", "left_hand_target", "right_hand_target") instance=ExtResource("1_0n0mq")]
+script = ExtResource("2_v14hp")
+anim_player = NodePath("AnimationPlayer")
+left_hand_target = NodePath("Armature/Skeleton3D/LeftHandTarget")
+right_hand_target = NodePath("Armature/Skeleton3D/RightHandTarget")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/scale = Vector3(1, 1, 1)
+
+[node name="LeftHandTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.707113, -0.7071, -0.000529498, -0.707091, -0.7071, -0.00564086, 0.00361422, 0.00436318, -0.999984, -0.0308378, 0.251529, -1.32527)
+bone_name = "Target_Hand_Left"
+bone_idx = 1
+
+[node name="RightHandTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.707113, 0.7071, -0.000529468, 0.707091, -0.7071, 0.00564063, 0.00361413, -0.00436294, -0.999984, 0.0630096, 0.221249, -0.540699)
+bone_name = "Target_Hand_Right"
+bone_idx = 2
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Idle"
+reset_on_save = false

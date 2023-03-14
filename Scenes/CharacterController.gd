@@ -21,7 +21,7 @@ var running_speed_modifier = 2
 
 @onready var head = $Head
 @onready var camera:Camera3D = $Head/Camera3D
-@onready var equipedWeapon:weapon = $Head/Camera3D/m1garand
+@onready var equipedWeapon:weapon = $Head/Camera3D/mdl_gun_m1garand
 
 func _ready():
 	equipedWeapon.character = self
@@ -48,6 +48,8 @@ func _input(event):
 		equipedWeapon.action_2(true)
 	elif  event.is_action_released("action_2"):
 		equipedWeapon.action_2(false)
+	elif  event.is_action_pressed("reload"):
+		equipedWeapon.reload(true)
 
 func _process(delta):
 	#camera physics interpolation to reduce physics jitter on high refresh-rate monitors

@@ -2,8 +2,8 @@ class_name weapon extends Node3D
 
 var character:CharacterController
 
-@export var hand1_target:Node3D
-@export var hand2_target:Node3D
+@export var left_hand_target:Node3D
+@export var right_hand_target:Node3D
 
 var bob:bool = true
 @export var frequency:float = 5
@@ -17,9 +17,11 @@ var theta:float = 0
 var default_position:Vector3
 var target_position:Vector3
 
-var sway:bool = true;
-var sway_lerp:float = 5
-@export var sway_amnt: float
+@export_category("Sway")
+@export var sway:bool = true;
+@export var sway_lerp:float = 5
+@export var sway_amnt: float = .05
+@export var sway_treshold: float = 2
 
 func _ready():
 	default_position = position
@@ -37,7 +39,7 @@ func SwayAnimation(delta):
 	
 	var mouse_mov = character.mouse_mov
 	if character.mouse_mov != null:
-		if mouse_mov.length() > 5:
+		if mouse_mov.length() > sway_treshold:
 			var finalRot = Vector3()
 			finalRot.y = sway_amnt * -mouse_mov.normalized().x
 			finalRot.x = sway_amnt * -mouse_mov.normalized().y
@@ -71,4 +73,7 @@ func action_1(pressed: bool) -> void:
 	pass
 
 func action_2(pressed: bool) -> void:
+	pass
+
+func reload(pressed: bool) -> void:
 	pass
