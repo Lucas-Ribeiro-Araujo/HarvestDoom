@@ -1,0 +1,143 @@
+[gd_scene load_steps=9 format=3 uid="uid://dngkxwft4x01y"]
+
+[ext_resource type="Theme" uid="uid://cw1iabx6y3v1c" path="res://Data/Themes/GlobalTheme.tres" id="1_pi3wy"]
+[ext_resource type="Script" path="res://Scripts/UI/ammoLabel.gd" id="2_go28o"]
+[ext_resource type="Texture2D" uid="uid://do3jtp6o3ow5q" path="res://Data/Textures/UI/Crosshair.png" id="2_kmers"]
+[ext_resource type="Script" path="res://Scripts/Voicetron/dialog_system.gd" id="4_q3tvs"]
+[ext_resource type="Texture2D" uid="uid://cfwrdu0r685sy" path="res://Data/Images/Portraits/Floberts_Portrait.png" id="5_w836w"]
+
+[sub_resource type="GDScript" id="GDScript_mpo74"]
+resource_name = "FPSCounter"
+script/source = "extends Label
+
+func _process(delta):
+	var fps = Engine.get_frames_per_second()
+	text = \"%s fps\" % fps
+"
+
+[sub_resource type="CameraTexture" id="CameraTexture_2tcnm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n8sct"]
+font_size = 8
+
+[node name="Canvas" type="Control"]
+texture_filter = 1
+custom_minimum_size = Vector2(480, 270)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pi3wy")
+
+[node name="FpsCounter" type="Panel" parent="."]
+layout_mode = 1
+offset_right = 92.0
+offset_bottom = 24.0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="FpsCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="fpsLabel" type="Label" parent="FpsCounter/VSplitContainer"]
+layout_mode = 2
+text = "000 fps"
+vertical_alignment = 1
+script = SubResource("GDScript_mpo74")
+
+[node name="AmmoCounter" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -92.0
+offset_bottom = 24.0
+grow_horizontal = 0
+
+[node name="VSplitContainer" type="VSplitContainer" parent="AmmoCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ammoLabel" type="Label" parent="AmmoCounter/VSplitContainer"]
+layout_mode = 2
+text = "10/10"
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("2_go28o")
+
+[node name="Crosshair" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_kmers")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CameraTexture_2tcnm")
+
+[node name="DialogSystem" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_q3tvs")
+
+[node name="DialogText" type="Label" parent="DialogSystem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Olá amigos bem vindos ao meu game espero que gostem lesgooo"
+label_settings = SubResource("LabelSettings_n8sct")
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="DialogSystem/DialogText"]
+layout_mode = 1
+offset_top = -64.0
+offset_right = 64.0
+texture = ExtResource("5_w836w")
+
+[node name="Timer" type="Timer" parent="DialogSystem"]
+wait_time = 0.1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogSystem"]
+pitch_scale = 2.0
+
+[connection signal="timeout" from="DialogSystem/Timer" to="DialogSystem" method="_on_timer_timeout"]

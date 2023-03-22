@@ -1,27 +1,67 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2t75bo1c4scy"]
+[gd_scene load_steps=8 format=3 uid="uid://di05tvacji111"]
 
-[ext_resource type="PackedScene" uid="uid://dspfuml38jpa" path="res://Assets/Guns/mdl_gun_m1garand.blend" id="1_0n0mq"]
+[ext_resource type="PackedScene" uid="uid://dspfuml38jpa" path="res://Data/Models/Guns/mdl_gun_m1garand.blend" id="1_a812f"]
 [ext_resource type="Script" path="res://Scripts/Weapons/m1_garand.gd" id="2_v14hp"]
+[ext_resource type="PackedScene" uid="uid://col1gbssrx8eb" path="res://Scenes/Guns/decal_bullet_hole.tscn" id="3_amjgx"]
+[ext_resource type="AudioStream" uid="uid://cosykysde8xsh" path="res://Data/Audio/shotM1Garand.wav" id="3_cf5sq"]
+[ext_resource type="Texture2D" uid="uid://dctvngn5s7sv0" path="res://Data/Textures/FX/MuzzleFlash.png" id="3_rhax2"]
 
-[node name="mdl_gun_m1garand" node_paths=PackedStringArray("anim_player", "left_hand_target", "right_hand_target") instance=ExtResource("1_0n0mq")]
+[sub_resource type="QuadMesh" id="QuadMesh_bkcxw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80go1"]
+transparency = 1
+specular_mode = 2
+albedo_texture = ExtResource("3_rhax2")
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+texture_filter = 0
+disable_receive_shadows = true
+billboard_mode = 1
+
+[node name="gun_m1garand" node_paths=PackedStringArray("left_hand_target", "right_hand_target") instance=ExtResource("1_a812f")]
 script = ExtResource("2_v14hp")
-anim_player = NodePath("AnimationPlayer")
+bullet_hole = ExtResource("3_amjgx")
 left_hand_target = NodePath("Armature/Skeleton3D/LeftHandTarget")
 right_hand_target = NodePath("Armature/Skeleton3D/RightHandTarget")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(6.8907e-17, 0.319314, -0.543187)
+bones/1/position = Vector3(0.0657702, 1.00782, -0.0694621)
+bones/1/rotation = Quaternion(-0.719608, 0.0929457, 0.141352, 0.673457)
 bones/1/scale = Vector3(1, 1, 1)
+bones/2/position = Vector3(0.046263, -0.129626, -0.1274)
+bones/2/rotation = Quaternion(-0.656966, -0.253689, -0.26091, 0.660275)
+
+[node name="BaseMesh" parent="Armature/Skeleton3D" index="0"]
+layers = 2
 
 [node name="LeftHandTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.707113, -0.7071, -0.000529498, -0.707091, -0.7071, -0.00564086, 0.00361422, 0.00436318, -0.999984, -0.0308378, 0.251529, -1.32527)
+transform = Transform3D(0.942761, -0.324158, -0.0782464, -0.328626, -0.942975, -0.0529505, -0.05662, 0.0756335, -0.995527, 0.0657702, 0.249852, -1.55101)
 bone_name = "Target_Hand_Left"
 bone_idx = 1
 
 [node name="RightHandTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.707113, 0.7071, -0.000529468, 0.707091, -0.7071, 0.00564063, 0.00361413, -0.00436294, -0.999984, 0.0630096, 0.221249, -0.540699)
+transform = Transform3D(0.735136, 0.677875, 0.00781024, 0.677827, -0.735177, 0.00807476, 0.0112156, -0.000642002, -0.999937, 0.046263, 0.191914, -0.413561)
 bone_name = "Target_Hand_Right"
 bone_idx = 2
 
+[node name="GunTip" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, 2.13163e-14, -2.38419e-07, 2.13163e-14, 1, 1.78814e-07, 2.38419e-07, -1.78814e-07, 1, 6.8907e-17, 0.319314, -1.97768)
+bone_name = "BarrelTip"
+bone_idx = 4
+
+[node name="MuzzleFlash" type="MeshInstance3D" parent="Armature/Skeleton3D/GunTip" index="0"]
+layers = 2
+mesh = SubResource("QuadMesh_bkcxw")
+surface_material_override/0 = SubResource("StandardMaterial3D_80go1")
+
 [node name="AnimationPlayer" parent="." index="1"]
-autoplay = "Idle"
 reset_on_save = false
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+transform = Transform3D(1, 2.13163e-14, -2.38419e-07, 2.13163e-14, 1, 1.78814e-07, 2.38419e-07, -1.78814e-07, 1, 6.8907e-17, 0.31033, -1.01478)
+stream = ExtResource("3_cf5sq")
+volume_db = -28.518
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished" flags=18]

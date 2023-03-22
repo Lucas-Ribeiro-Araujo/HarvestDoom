@@ -1,5 +1,7 @@
 class_name weapon extends Node3D 
 
+#NEEDS REFACTORING
+
 var character:CharacterController
 
 @export var left_hand_target:Node3D
@@ -31,7 +33,20 @@ func _process(delta):
 	if character:
 		BobbingAnimation(delta)
 		SwayAnimation(delta)
-		pass
+		
+#		#Raycast from screen center
+#		var space_state = get_world_3d().direct_space_state
+#		var point = get_viewport().size/2
+#		var start = character.camera.project_ray_origin(point)
+#		var finish = start + character.camera.project_ray_normal(point) * 1000
+#
+#		var rayPar = PhysicsRayQueryParameters3D.create(start, finish)
+#
+#		var worldhitPoint = space_state.intersect_ray(rayPar)
+#		if worldhitPoint:
+#			look_at(worldhitPoint.position, Vector3.UP)
+#
+#		pass
 
 func SwayAnimation(delta):
 	if !sway:

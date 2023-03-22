@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cw1iabx6y3v1c"]
+
+[ext_resource type="FontFile" uid="uid://c22sxid24mwvu" path="res://Data/Fonts/dogicapixel.otf" id="1_hiapy"]
+
+[resource]
+default_font = ExtResource("1_hiapy")
+default_font_size = 8
