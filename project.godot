@@ -79,6 +79,7 @@ reload={
 [layer_names]
 
 3d_render/layer_2="fps_view_model"
+3d_physics/layer_4="Particles"
 
 [rendering]
 

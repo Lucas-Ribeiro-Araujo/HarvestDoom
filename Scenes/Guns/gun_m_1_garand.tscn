@@ -37,12 +37,12 @@ bones/2/rotation = Quaternion(-0.656966, -0.253689, -0.26091, 0.660275)
 layers = 2
 
 [node name="LeftHandTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.942761, -0.324158, -0.0782464, -0.328626, -0.942975, -0.0529505, -0.05662, 0.0756335, -0.995527, 0.0657702, 0.249852, -1.55101)
+transform = Transform3D(0.942761, -0.324158, -0.0782463, -0.328626, -0.942975, -0.05295, -0.0566201, 0.075633, -0.995527, 0.0657702, 0.249852, -1.55101)
 bone_name = "Target_Hand_Left"
 bone_idx = 1
 
 [node name="RightHandTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.735136, 0.677875, 0.00781024, 0.677827, -0.735177, 0.00807476, 0.0112156, -0.000642002, -0.999937, 0.046263, 0.191914, -0.413561)
+transform = Transform3D(0.735136, 0.677875, 0.00780898, 0.677827, -0.735177, 0.00807476, 0.0112146, -0.000642896, -0.999937, 0.046263, 0.191914, -0.413561)
 bone_name = "Target_Hand_Right"
 bone_idx = 2
 
@@ -52,6 +52,7 @@ bone_name = "BarrelTip"
 bone_idx = 4
 
 [node name="MuzzleFlash" type="MeshInstance3D" parent="Armature/Skeleton3D/GunTip" index="0"]
+visible = false
 layers = 2
 mesh = SubResource("QuadMesh_bkcxw")
 surface_material_override/0 = SubResource("StandardMaterial3D_80go1")

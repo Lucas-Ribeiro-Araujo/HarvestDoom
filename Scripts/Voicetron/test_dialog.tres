@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="dialog" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="dialog_resource" load_steps=2 format=3 uid="uid://bnq7hqc1oecsk"]
 
 [ext_resource type="Script" path="res://Scripts/Voicetron/dialog_resource.gd" id="1_5lua1"]
 

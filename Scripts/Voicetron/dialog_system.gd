@@ -1,10 +1,12 @@
 extends Control
 
-const TEXT_SPEED:float = 0.1
+const TEXT_SPEED:float = 0.05
 
-@onready var text_field:Label = $DialogText
-@onready var timer:Timer = $Timer
-@onready var audio_player:AudioStreamPlayer = $AudioStreamPlayer
+@onready var text_field:Label = $Panel/DialogText
+@onready var timer:Timer = $Panel/Timer
+@onready var audio_player:AudioStreamPlayer = $Panel/AudioStreamPlayer
+@onready var continue_prompt:Control = $Panel/ContinuePrompt
+@onready var panel:Panel = $Panel
 
 var dialog: dialog_resource
 var writing: bool = false
@@ -18,10 +20,12 @@ var current_char_index: int = 0
 func _ready():
 	timer.wait_time = TEXT_SPEED
 	
-	dialog = load("res://Scripts/Voicetron/test_dialog.tres")
-	init(dialog)
+#	dialog = load("res://Scripts/Voicetron/test_dialog.tres")
+#	init(dialog)
 
 func init(dialog_res:dialog_resource) -> void:
+	panel.visible = true
+	
 	dialog = dialog_res
 	
 	if dialog:
@@ -44,12 +48,13 @@ func _on_timer_timeout():
 	if current_char_index == chars_to_write:
 		writing = false
 		timer.stop()
+		continue_prompt.visible = true
 
 func next_dialog() -> void:
 	if dialog:
 		text_field.text = ""
-		print(current_dialog_index)
 		current_dialog_index += 1
+		continue_prompt.visible = false
 		
 		
 		if current_dialog_index < dialogs_to_display:
@@ -60,6 +65,7 @@ func next_dialog() -> void:
 		else:
 			timer.stop()
 			dialog = null
+			panel.visible = false
 	
 
 func play_char_audio(char:String) -> void:

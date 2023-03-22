@@ -105,7 +105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CameraTexture_2tcnm")
 
-[node name="DialogSystem" type="Panel" parent="."]
+[node name="DialogSystem" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 1
 anchors_preset = 12
@@ -117,27 +117,49 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("4_q3tvs")
 
-[node name="DialogText" type="Label" parent="DialogSystem"]
+[node name="Panel" type="Panel" parent="DialogSystem"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DialogText" type="Label" parent="DialogSystem/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 344.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Olá amigos bem vindos ao meu game espero que gostem lesgooo"
 label_settings = SubResource("LabelSettings_n8sct")
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="DialogSystem/DialogText"]
+[node name="TextureRect" type="TextureRect" parent="DialogSystem/Panel/DialogText"]
 layout_mode = 1
 offset_top = -64.0
 offset_right = 64.0
 texture = ExtResource("5_w836w")
 
-[node name="Timer" type="Timer" parent="DialogSystem"]
+[node name="Timer" type="Timer" parent="DialogSystem/Panel"]
 wait_time = 0.1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogSystem"]
-pitch_scale = 2.0
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DialogSystem/Panel"]
+pitch_scale = 1.4
 
-[connection signal="timeout" from="DialogSystem/Timer" to="DialogSystem" method="_on_timer_timeout"]
+[node name="ContinuePrompt" type="Label" parent="DialogSystem/Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -131.0
+offset_top = -8.0
+offset_bottom = 2.0
+grow_horizontal = 0
+text = "Press \"F\" to continue"
+
+[connection signal="timeout" from="DialogSystem/Panel/Timer" to="DialogSystem" method="_on_timer_timeout"]

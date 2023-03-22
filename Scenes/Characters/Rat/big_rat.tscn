@@ -116,8 +116,9 @@ _data = {
 "Idle": SubResource("Animation_tsdoc")
 }
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yteem"]
-size = Vector3(1, 0.3, 0.4)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xbmda"]
+radius = 0.2
+height = 1.0
 
 [node name="bigRat" type="CharacterBody3D" groups=["Unit"]]
 script = ExtResource("1_xpn5y")
@@ -209,5 +210,5 @@ libraries = {
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0.00862694, 0.1441, -0.48933)
-shape = SubResource("BoxShape3D_yteem")
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0.00862694, 0.1441, -0.48933)
+shape = SubResource("CapsuleShape3D_xbmda")

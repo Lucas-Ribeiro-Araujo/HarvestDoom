@@ -41,7 +41,7 @@ func action_1(pressed:bool) -> void:
 			var object = _result.collider
 			if object.is_in_group("Unit"):
 				if object.has_method("take_damage"):
-					object.take_damage()
+					object.take_damage((from - to).normalized())
 	
 	elif current_ammo == 0:
 		reload(true)
