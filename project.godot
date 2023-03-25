@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="HarvestDoom"
-run/main_scene="res://Scenes/main.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://Data/Vector/icon.svg"
+config/icon="res://data/images/vector/icon.svg"
 
 [autoload]
 
-DecalManager="*res://Scripts/decal_manager.gd"
+DecalSingleton="*res://scenes/global/decal_manager.tscn"
+UISingleton="*res://scenes/global/main_ui.tscn"
+MusicPlayerSingleton="*res://scenes/global/music_player.tscn"
 
 [display]
 
@@ -27,6 +29,10 @@ window/size/initial_position=Vector2i(0, -8)
 window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="viewport"
+
+[filesystem]
+
+import/fbx/enabled=false
 
 [input]
 
@@ -75,10 +81,16 @@ reload={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":82,"key_label":0,"unicode":114,"echo":false,"script":null)
 ]
 }
+interact={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
 3d_render/layer_2="fps_view_model"
+3d_physics/layer_3="Interaction"
 3d_physics/layer_4="Particles"
 
 [rendering]
@@ -88,6 +100,7 @@ lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
 global_illumination/voxel_gi/quality=1
 textures/default_filters/use_nearest_mipmap_filter=true
 textures/default_filters/anisotropic_filtering_level=0
+textures/default_filters/texture_mipmap_bias=-2.0
 textures/decals/filter=2
 textures/light_projectors/filter=2
 textures/canvas_textures/default_texture_filter=0

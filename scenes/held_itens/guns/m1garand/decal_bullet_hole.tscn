@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgsu4jfxwpo11"]
+
+[ext_resource type="Texture2D" uid="uid://bff6tb1xw2yie" path="res://data/images/fx/guns/m1garand/hole_decal_m1garand.png" id="1_yxbua"]
+
+[node name="Decal" type="Decal"]
+size = Vector3(1, 0.1, 1)
+texture_albedo = ExtResource("1_yxbua")

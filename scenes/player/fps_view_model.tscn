@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjufrcwokcfkj"]
+
+[ext_resource type="PackedScene" uid="uid://c68wray5omr0m" path="res://data/models/player/fps_view_model.glb" id="1_ddvkp"]
+[ext_resource type="Script" path="res://src/player/submodules/player_fps_view_model.gd" id="2_k1so1"]
+
+[node name="FPSViewModel" node_paths=PackedStringArray("left_skeleton_ik", "right_skeleton_ik") instance=ExtResource("1_ddvkp")]
+script = ExtResource("2_k1so1")
+left_skeleton_ik = NodePath("LeftArm/Skeleton3D/SkeletonIK3D")
+right_skeleton_ik = NodePath("RightArm/Skeleton3D/SkeletonIK3D")
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="LeftArm/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"ArmRight0"
+tip_bone = &"ArmRight1.001"
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="RightArm/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"ArmRight0"
+tip_bone = &"ArmRight1.001"

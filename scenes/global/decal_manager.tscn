@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c75mmluixqnfc"]
+
+[ext_resource type="Script" path="res://src/global/decal_manager.gd" id="1_1cosl"]
+
+[node name="DecalManager" type="Node"]
+script = ExtResource("1_1cosl")

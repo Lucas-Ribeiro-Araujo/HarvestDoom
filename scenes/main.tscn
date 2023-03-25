@@ -1,0 +1,152 @@
+[gd_scene load_steps=10 format=3 uid="uid://cf3dllw3c3n5s"]
+
+[ext_resource type="Script" path="res://src/global/main.gd" id="1_knthb"]
+[ext_resource type="Material" uid="uid://cpvpnl2hxy6qg" path="res://data/material/debug_grid.material" id="3_hadv0"]
+[ext_resource type="PackedScene" uid="uid://ccyquwt2lccls" path="res://data/models/environment/rooms/rat_room.blend" id="4_amndd"]
+[ext_resource type="PackedScene" uid="uid://clu148wdeitan" path="res://scenes/environment/water.tscn" id="4_umbfx"]
+[ext_resource type="PackedScene" uid="uid://btqhu625jdtgr" path="res://scenes/player/player.tscn" id="6_8upw5"]
+[ext_resource type="Script" path="res://src/voicetron/dialog_resource.gd" id="6_x21nx"]
+[ext_resource type="PackedScene" uid="uid://bhoim0k2fkf6v" path="res://scenes/characters/rat/rat.tscn" id="8_vr64r"]
+
+[sub_resource type="Environment" id="Environment_t4b23"]
+background_mode = 1
+background_color = Color(0.317647, 0.541176, 0.713726, 1)
+background_energy_multiplier = 0.01
+ambient_light_source = 2
+ambient_light_color = Color(0.317647, 0.541176, 0.713726, 1)
+tonemap_mode = 2
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_min_cell_size = 0.4
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.025
+adjustment_saturation = 0.01
+
+[sub_resource type="Resource" id="Resource_og5gr"]
+script = ExtResource("6_x21nx")
+textSegments = PackedStringArray("Eyyy", "Sup sup my man", "how\'s it doin")
+
+[node name="Main" type="Node"]
+script = ExtResource("1_knthb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t4b23")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -1.98559e-07, -0.5, 0.5, 2.98315e-07, 0.866025, -2.27992e-08, -1, 3.57628e-07, 0, 3, 0)
+visible = false
+shadow_enabled = true
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Water" parent="Environment" instance=ExtResource("4_umbfx")]
+transform = Transform3D(1, 0, 0, 0, 0.999955, -0.0095119, 0, 0.0095119, 0.999955, -2.38419e-07, -0.96058, -1.65679)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -0.5, -5)
+material_overlay = ExtResource("3_hadv0")
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5)
+size = Vector3(6, 1, 20)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -7, 0.5, 11)
+size = Vector3(6, 1, 4)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, -7, 1.7, 14)
+size = Vector3(6, 1, 4)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 8, 5)
+size = Vector3(6, 1, 20)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7, 4, -5)
+size = Vector3(6, 2, 8)
+
+[node name="RatRoom" parent="Environment" instance=ExtResource("4_amndd")]
+
+[node name="bigRat6" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat7" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -6)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat8" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat9" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat10" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -3)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat11" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat12" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -1)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat13" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 1)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat15" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -6)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat16" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -3)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat17" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, -1)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat18" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat19" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 2)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat20" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 3)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat21" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat22" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 3)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat23" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 3)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat24" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 5)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat25" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 6)
+dialog = SubResource("Resource_og5gr")
+
+[node name="bigRat14" parent="." instance=ExtResource("8_vr64r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+dialog = SubResource("Resource_og5gr")
+
+[node name="Player" parent="." instance=ExtResource("6_8upw5")]

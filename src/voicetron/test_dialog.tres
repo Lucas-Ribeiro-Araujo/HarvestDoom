@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="dialog_resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/voicetron/dialog_resource.gd" id="1_5lua1"]
+
+[resource]
+script = ExtResource("1_5lua1")
+textSegments = PackedStringArray("Hello my name is ", "ticka ticka tick", "Slim shady")

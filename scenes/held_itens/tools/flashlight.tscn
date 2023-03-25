@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://40mq03x27ofp"]
+
+[ext_resource type="PackedScene" uid="uid://bnttbvag2slc3" path="res://data/models/held_itens/tools/flashlight/flashlight.glb" id="1_74yvw"]
+[ext_resource type="Script" path="res://src/held_itens/guns/weapon.gd" id="2_h242o"]
+[ext_resource type="Material" uid="uid://folad1jxh0rg" path="res://data/material/pallete_toon.material" id="2_j3e3n"]
+
+[node name="Flashlight" node_paths=PackedStringArray("left_hand_target") instance=ExtResource("1_74yvw")]
+script = ExtResource("2_h242o")
+left_hand_target = NodePath("FlashlightArmature/Skeleton3D/LeftHandTarget")
+
+[node name="FlashlightMesh" parent="FlashlightArmature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("2_j3e3n")
+
+[node name="Tip" type="BoneAttachment3D" parent="FlashlightArmature/Skeleton3D" index="1"]
+transform = Transform3D(1, 3.48773e-16, 2.38419e-07, 5.54313e-09, 0.99973, -0.0232496, -2.38354e-07, 0.0232496, 0.99973, 9.53674e-07, 2.40663, 2.23962e-07)
+bone_name = "Tip"
+bone_idx = 1
+
+[node name="SpotLight3D" type="SpotLight3D" parent="FlashlightArmature/Skeleton3D/Tip" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 25.0
+spot_angle = 25.0
+
+[node name="LeftHandTarget" type="BoneAttachment3D" parent="FlashlightArmature/Skeleton3D" index="2"]
+transform = Transform3D(-0.880268, 0.369556, -0.297586, 0.0457101, 0.69032, 0.722059, 0.47227, 0.622003, -0.624559, -0.466383, 0.222425, -0.578237)
+bone_name = "Target_Hand_Left"
+bone_idx = 2

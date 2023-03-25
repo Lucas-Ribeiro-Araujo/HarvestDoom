@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://btqhu625jdtgr"]
+
+[ext_resource type="Script" path="res://src/player/player.gd" id="1_w85w6"]
+[ext_resource type="Script" path="res://src/player/submodules/player_controller.gd" id="2_tnjwt"]
+[ext_resource type="PackedScene" uid="uid://cjufrcwokcfkj" path="res://scenes/player/fps_view_model.tscn" id="3_wr1iy"]
+[ext_resource type="PackedScene" uid="uid://b45f0wi11pnlr" path="res://scenes/held_itens/guns/m1garand/m1garand.tscn" id="4_3pd1p"]
+[ext_resource type="PackedScene" uid="uid://40mq03x27ofp" path="res://scenes/held_itens/tools/flashlight.tscn" id="5_8qsby"]
+[ext_resource type="Script" path="res://src/player/submodules/player_interaction.gd" id="5_cos2t"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_myidf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gne5i"]
+
+[node name="Player" type="Node"]
+script = ExtResource("1_w85w6")
+
+[node name="PlayerController" type="CharacterBody3D" parent="."]
+script = ExtResource("2_tnjwt")
+
+[node name="Foot" type="CollisionShape3D" parent="PlayerController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_myidf")
+
+[node name="Collider" type="CollisionShape3D" parent="PlayerController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_gne5i")
+
+[node name="Head" type="Node3D" parent="PlayerController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="PlayerController/Head"]
+cull_mask = 3
+fov = 60.0
+
+[node name="FPSViewModel" parent="PlayerController/Head/Camera3D" node_paths=PackedStringArray("targetWeapon") instance=ExtResource("3_wr1iy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.45, -0.1)
+targetWeapon = NodePath("../Hand/Flashlight")
+
+[node name="Hand" type="Node3D" parent="PlayerController/Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.45, 0.1)
+
+[node name="M1Garand" parent="PlayerController/Head/Camera3D/Hand" instance=ExtResource("4_3pd1p")]
+visible = false
+ads_position = Vector3(-0.3, 0.145, -0.1)
+
+[node name="Flashlight" parent="PlayerController/Head/Camera3D/Hand" instance=ExtResource("5_8qsby")]
+
+[node name="InteractionRayCast" type="RayCast3D" parent="PlayerController/Head/Camera3D"]
+target_position = Vector3(0, 0, -5)
+collision_mask = 4
+debug_shape_thickness = 3
+script = ExtResource("5_cos2t")

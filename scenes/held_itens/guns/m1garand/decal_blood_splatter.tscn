@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1xk1udv80ae3"]
+
+[ext_resource type="Texture2D" uid="uid://cu4vjhycgywq4" path="res://data/images/fx/gore/blood_splatter.png" id="1_e4tnp"]
+
+[node name="Decal" type="Decal"]
+texture_albedo = ExtResource("1_e4tnp")

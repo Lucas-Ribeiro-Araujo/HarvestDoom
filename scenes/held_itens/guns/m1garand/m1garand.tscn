@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://b45f0wi11pnlr"]
+
+[ext_resource type="PackedScene" uid="uid://c6bpalpiaglha" path="res://data/models/held_itens/guns/m1garand/gun_m1garand.glb" id="1_ivejq"]
+[ext_resource type="Script" path="res://src/held_itens/guns/m1_garand.gd" id="2_mnwna"]
+[ext_resource type="PackedScene" uid="uid://cgsu4jfxwpo11" path="res://scenes/held_itens/guns/m1garand/decal_bullet_hole.tscn" id="3_nonne"]
+[ext_resource type="Material" uid="uid://folad1jxh0rg" path="res://data/material/pallete_toon.material" id="4_s40cr"]
+[ext_resource type="Texture2D" uid="uid://dctvngn5s7sv0" path="res://data/images/fx/guns/m1garand/muzzle_flash_m1garand.png" id="5_58jg7"]
+[ext_resource type="AudioStream" uid="uid://cosykysde8xsh" path="res://data/audio/sfx/guns/m1garand/shot_m1garand.wav" id="6_11vf0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u3wx5"]
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4bu5o"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("5_58jg7")
+emission_enabled = true
+emission_texture = ExtResource("5_58jg7")
+texture_filter = 0
+
+[node name="M1Garand" node_paths=PackedStringArray("left_hand_target", "right_hand_target") instance=ExtResource("1_ivejq")]
+script = ExtResource("2_mnwna")
+ads_position = Vector3(0, 0.375, 0)
+bullet_hole = ExtResource("3_nonne")
+left_hand_target = NodePath("Armature/Skeleton3D/LeftHandTarget")
+right_hand_target = NodePath("Armature/Skeleton3D/RightHandTarget")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(6.8907e-17, 0.328462, -0.462377)
+bones/0/rotation = Quaternion(-0.688945, 7.25061e-17, 8.44526e-17, 0.724813)
+bones/1/position = Vector3(0.0657702, 1.00782, -0.0694621)
+bones/1/rotation = Quaternion(-0.719608, 0.0929457, 0.141352, 0.673457)
+bones/2/position = Vector3(0.046263, -0.129626, -0.1274)
+bones/2/rotation = Quaternion(-0.656966, -0.253689, -0.26091, 0.660275)
+
+[node name="BaseMesh" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("4_s40cr")
+
+[node name="LeftHandTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.942761, -0.324158, -0.0782463, -0.325332, -0.945597, -0.00240001, -0.0732115, 0.0277187, -0.996931, 0.0657702, 0.310195, -1.47242)
+bone_name = "Target_Hand_Left"
+bone_idx = 1
+
+[node name="RightHandTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.735136, 0.677875, 0.00780898, 0.676387, -0.734198, 0.0587699, 0.045572, -0.0379219, -0.998241, 0.046263, 0.194653, -0.339378)
+bone_name = "Target_Hand_Right"
+bone_idx = 2
+
+[node name="GunTipTarget" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
+transform = Transform3D(1, 2.1305e-14, -2.38419e-07, -1.20899e-08, 0.998713, -0.0507085, 2.38112e-07, 0.0507085, 0.998713, 6.84971e-17, 0.401204, -1.89503)
+bone_name = "BarrelTip"
+bone_idx = 4
+
+[node name="MuzzleFlash" type="MeshInstance3D" parent="Armature/Skeleton3D/GunTipTarget" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("PlaneMesh_u3wx5")
+surface_material_override/0 = SubResource("StandardMaterial3D_4bu5o")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Armature/Skeleton3D/GunTipTarget/MuzzleFlash" index="0"]
+omni_range = 25.0
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("6_11vf0")
+volume_db = -35.0
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished" flags=18]
