@@ -30,6 +30,11 @@ window/size/resizable=false
 window/size/borderless=true
 window/stretch/mode="viewport"
 
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
 [filesystem]
 
 import/fbx/enabled=false

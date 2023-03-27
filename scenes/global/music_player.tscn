@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bglwug3dfw2tv"]
 
 [ext_resource type="Script" path="res://src/global/music_player.gd" id="1_6ln22"]
-[ext_resource type="AudioStream" uid="uid://d23cqb4j3h0d6" path="res://data/audio/music/wellerman.mp3" id="2_gm47s"]
+[ext_resource type="AudioStream" uid="uid://buhvf5dvfmoyv" path="res://data/audio/music/wasabi.mp3" id="2_c5j1h"]
 
 [node name="MusicPlayer" type="Node"]
 script = ExtResource("1_6ln22")
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_gm47s")
+stream = ExtResource("2_c5j1h")
 volume_db = -12.0
 autoplay = true
 

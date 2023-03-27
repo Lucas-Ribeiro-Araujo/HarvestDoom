@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cf3dllw3c3n5s"]
+[gd_scene load_steps=9 format=3 uid="uid://cf3dllw3c3n5s"]
 
 [ext_resource type="Script" path="res://src/global/main.gd" id="1_knthb"]
 [ext_resource type="Material" uid="uid://cpvpnl2hxy6qg" path="res://data/material/debug_grid.material" id="3_hadv0"]
-[ext_resource type="PackedScene" uid="uid://ccyquwt2lccls" path="res://data/models/environment/rooms/rat_room.blend" id="4_amndd"]
 [ext_resource type="PackedScene" uid="uid://clu148wdeitan" path="res://scenes/environment/water.tscn" id="4_umbfx"]
 [ext_resource type="PackedScene" uid="uid://btqhu625jdtgr" path="res://scenes/player/player.tscn" id="6_8upw5"]
 [ext_resource type="Script" path="res://src/voicetron/dialog_resource.gd" id="6_x21nx"]
@@ -49,7 +48,7 @@ use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5)
-size = Vector3(6, 1, 20)
+size = Vector3(33.4154, 1, 20)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -7, 0.5, 11)
@@ -66,12 +65,6 @@ size = Vector3(6, 1, 20)
 [node name="CSGBox3D2" type="CSGBox3D" parent="Environment/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7, 4, -5)
 size = Vector3(6, 2, 8)
-
-[node name="RatRoom" parent="Environment" instance=ExtResource("4_amndd")]
-
-[node name="bigRat6" parent="." instance=ExtResource("8_vr64r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -6)
-dialog = SubResource("Resource_og5gr")
 
 [node name="bigRat7" parent="." instance=ExtResource("8_vr64r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -6)
